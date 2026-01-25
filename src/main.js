@@ -4,11 +4,11 @@ import { SCENE_KEYS } from "./scenes/scene-keys.js";
 
 // game instance
 const game = new Phaser.Game({
-    parent:"gamne-container",
+    parent:"game-container",
    // scene:[PreloadScene]
 });
 
 // rather than running below we can specify which scene to load in the game obj , we can specify active in below line as well
 game.scene.add(SCENE_KEYS.PRELOAD_SCENE, PreloadScene)
 // if above scene was configured as being active no need to run below line
-//game.scene.start(SCENE_KEYS.PRELOAD_SCENE);
+game.scene.start(SCENE_KEYS.PRELOAD_SCENE);
