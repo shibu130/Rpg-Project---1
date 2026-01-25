@@ -36,13 +36,19 @@ export class PreloadScene extends Phaser.Scene{
         this.load.image(MONSTER_ASSET_KEYS.IGUANIGNITE, `${monsterTamer}/monsters/iguanignite.png`);
 
 
-        console.log("preload")
+        console.log("preload scene loading assets")
     }
 
     // this state loads after
     create(){
-        this.add.image(0,0,BATTLE_BACKGROUND_ASSETS.FOREST)
-        console.log("create")
+        //this.scale.width;
+        //this.scale.height;
+       //this.add.image(0,0,BATTLE_BACKGROUND_ASSETS.FOREST).setOrigin(0)
+        //.setOrigin(0) -> sets the origin to top left 
+        console.log("create call in preload scene");
+        console.log("moving to battle scene");
+        // once assets loaded we go to battle scene
+        this.scene.start(SCENE_KEYS.BATTLE_SCENE);
     }
 
     // update(){
