@@ -3,6 +3,15 @@ import { SCENE_KEYS } from "./scene-keys.js"
 import {BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSETS, HEALTH_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS } from "../assets/asset-key.js";
 
 
+const BATTLE_MENU_ACTIONS = Object.freeze({
+    SLASH:"slash",
+    GROWL:"growl",
+    FIGHT:"fight",
+    SWITCH:"switch",
+    FLEE:"flee",
+    HYPHEN:"-"
+});
+
 export class BattleScene extends Phaser.Scene{
 
     constructor(){
@@ -110,21 +119,56 @@ export class BattleScene extends Phaser.Scene{
         return this.add.container(x,y, [left, middle, right])
     }
 
+
     #createMainInfoPane(){
 
         const padding = 4
         const reduce = 128
+
+        const minorHeightDiff = 3
+
+        const height = this.scale.height - reduce - padding
+
         // first half
-        this.add.rectangle(0, this.scale.height - reduce - padding, this.scale.width/2,reduce,0xede4f3,1)
+        this.add.rectangle(0, height, this.scale.width/2, reduce + minorHeightDiff, 0xede4f3,1)
         .setOrigin(0,0)
         .setStrokeStyle(2,0xe4434a,1)
 
         // move horizontally to display second half
-        this.add.rectangle(this.scale.width/2, this.scale.height - reduce - padding, this.scale.width/2,reduce,0xede4f3,1)
+        this.add.rectangle(this.scale.width/2, height, this.scale.width/2, reduce + minorHeightDiff, 0xede4f3,1)
         .setOrigin(0,0)
-        .setStrokeStyle(2,0xe4434a,1)
+        .setStrokeStyle(2,0x800080,1)
+
+        // wondering why  setStrokeStyle
+        // rectangle drawns the rectangle , nothing much , i was expecting something 
+        // this.add adds the stuff to ui even though its in a variable , was wondering why this was redering in ui
+        //const slashText = this.add.text(33,50, BATTLE_MENU_ACTIONS.SLASH)
+
+        const fontColor = {
+            color:"black"
+        }
+
+    
+        this.add.container(0, height, [
+
+            this.add.text(33,30, BATTLE_MENU_ACTIONS.SLASH, fontColor),
+            this.add.text(33 + this.scale.width/4,30, BATTLE_MENU_ACTIONS.GROWL, fontColor),
+            this.add.text(33, 80, BATTLE_MENU_ACTIONS.HYPHEN, fontColor),
+            this.add.text(33 + this.scale.width/4, 80, BATTLE_MENU_ACTIONS.HYPHEN, fontColor),
+          //  this.add.text(,120, "-"),
 
 
+            this.add.text(33 + this.scale.width/2 ,30, BATTLE_MENU_ACTIONS.FIGHT, fontColor),
+            this.add.text(33 + this.scale.width*3/4 ,30, BATTLE_MENU_ACTIONS.SLASH, fontColor),
+            this.add.text(33 + this.scale.width/2, 80, BATTLE_MENU_ACTIONS.FLEE, fontColor),
+            this.add.text(33 + this.scale.width*3/4, 80, BATTLE_MENU_ACTIONS.SWITCH, fontColor),
+
+
+
+        ]);
+       
     }
+
+    
 
 }
