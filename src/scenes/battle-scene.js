@@ -20,6 +20,10 @@ export class BattleScene extends Phaser.Scene{
         });
     }
 
+    // battle container
+    /** @type{Phaser.GameObjects.Container | undefined} */
+    #battleContainer;
+
     // initialize
     init(){
 
@@ -108,6 +112,12 @@ export class BattleScene extends Phaser.Scene{
         this.#createMainInfoPane()
     }
 
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     * @returns 
+     */
     #createHealthBar(x,y){
         const left = this.add.image(x,y, HEALTH_BAR_ASSET_KEYS.LEFT_CAP).setOrigin(0,0.5);
        const middle = this.add.image(left.x + left.width,y, HEALTH_BAR_ASSET_KEYS.MIDDLE).setOrigin(0, 0.5);
@@ -148,27 +158,37 @@ export class BattleScene extends Phaser.Scene{
             color:"black"
         }
 
-    
-        this.add.container(0, height, [
+        this.#createRectanglePane(height,fontColor);
+        
+       
+    }
 
+     /**
+    * @param {number} height
+    * @param {object} fontColor
+    */
+     #createRectanglePane(height,fontColor){
+        this.#battleContainer = 
+        this.add.container(0, height, [
             this.add.text(33,30, BATTLE_MENU_ACTIONS.SLASH, fontColor),
             this.add.text(33 + this.scale.width/4,30, BATTLE_MENU_ACTIONS.GROWL, fontColor),
             this.add.text(33, 80, BATTLE_MENU_ACTIONS.HYPHEN, fontColor),
             this.add.text(33 + this.scale.width/4, 80, BATTLE_MENU_ACTIONS.HYPHEN, fontColor),
           //  this.add.text(,120, "-"),
-
-
             this.add.text(33 + this.scale.width/2 ,30, BATTLE_MENU_ACTIONS.FIGHT, fontColor),
             this.add.text(33 + this.scale.width*3/4 ,30, BATTLE_MENU_ACTIONS.SLASH, fontColor),
             this.add.text(33 + this.scale.width/2, 80, BATTLE_MENU_ACTIONS.FLEE, fontColor),
             this.add.text(33 + this.scale.width*3/4, 80, BATTLE_MENU_ACTIONS.SWITCH, fontColor),
-
-
-
         ]);
-       
     }
 
+
+    showBattleMenu(){
+        // null checks for jsdoc
+        if(this.#battleContainer != undefined || this.#battleContainer != null){
+            this.#battleContainer.setAlpha(0)
+        }
+    }
     
 
 }
