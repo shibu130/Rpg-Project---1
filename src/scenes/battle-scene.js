@@ -180,6 +180,16 @@ export class BattleScene extends Phaser.Scene{
             this.add.text(33 + this.scale.width/2, 80, BATTLE_MENU_ACTIONS.FLEE, fontColor),
             this.add.text(33 + this.scale.width*3/4, 80, BATTLE_MENU_ACTIONS.SWITCH, fontColor),
         ]);
+
+        // can be spilt into two though
+        // :)
+        //    this.#battleContainerTwo =
+        // this.add.container(this.scale.width/2, height, [
+        //      this.add.text(33 ,30, BATTLE_MENU_ACTIONS.FIGHT, fontColor).setOrigin(0),
+        //     this.add.text(33 + this.scale.width/4 ,30, BATTLE_MENU_ACTIONS.SLASH, fontColor),
+        //     this.add.text(33, 80, BATTLE_MENU_ACTIONS.FLEE, fontColor),
+        //     this.add.text(33 + this.scale.width/4, 80, BATTLE_MENU_ACTIONS.SWITCH, fontColor),
+        // ])
     }
 
 
