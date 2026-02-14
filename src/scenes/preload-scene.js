@@ -3,7 +3,8 @@ import Phaser from "../lib/phaser.js";
 import { SCENE_KEYS } from "./scene-keys.js";
 
 
-
+// load assets and change to battlescene
+// since battle scene is the first scene to be developed, we are loading the battle scene first
 export class PreloadScene extends Phaser.Scene{
     constructor(){
         super({
